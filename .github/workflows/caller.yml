@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+
+concurrency: nonreuse-wf-${{ github.event.ref }}
+
+jobs:
+  reusable-caller:
+    uses: ./.github/workflows/reusable.yml
+
+  nonreusable:
+    concurrency: nonreuse-job-${{ github.event.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "github.event.ref equals ${{ github.event.ref }}"
