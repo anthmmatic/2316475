@@ -1,0 +1,11 @@
+on:
+  workflow_call:
+
+concurrency: reuse-wf-${{ github.event.ref }}
+
+jobs:
+  reusable-called:
+    concurrency: reuse-job-${{ github.event.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "github.event.ref equals ${{ github.event.ref }}"
